@@ -9,7 +9,7 @@ function App() {
     const [showReport, setShowReport] = useState(false);
     let getReport = async(Url) =>{
       console.log(Url)
-     await axios.post('http://localhost:8000/',{url:Url})
+     await axios.post('https://light-house-backend.vercel.app/LightHouse',{url:Url})
       .then(function (response) {
         setReport(response);
         console.log(response);
