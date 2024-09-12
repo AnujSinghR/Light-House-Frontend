@@ -25,7 +25,7 @@ function App() {
        {!showReport ? (
         <Home getReport={getReport} />
       ) : (
-        <LighthouseReport report={Report} />
+        <LighthouseReport report={Report.data.report} />
       )}
       </>
     )
