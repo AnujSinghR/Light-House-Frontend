@@ -42,21 +42,13 @@ const LighthouseReport = ({ report }) => {
     return <div className="text-center mt-8 text-lg">Loading report...</div>;
   }
 
-  // Destructure the scores and audit details from the report
+  // Destructure the scores from the categories
   const {
     performance,
     accessibility,
     'best-practices': bestPractices,
     seo,
   } = report.categories;
-
-  const {
-    'first-contentful-paint': firstContentfulPaint,
-    'largest-contentful-paint': largestContentfulPaint,
-    'is-on-https': isOnHttps,
-    'redirects-http': redirectsHttp,
-    viewport,
-  } = report.audits;
 
   return (
     <div className="container mx-auto p-8 max-w-4xl">
@@ -68,41 +60,6 @@ const LighthouseReport = ({ report }) => {
         <ProgressBar label="Accessibility" value={accessibility.score * 100} color="#60A5FA" />
         <ProgressBar label="Best Practices" value={bestPractices.score * 100} color="#FBBF24" />
         <ProgressBar label="SEO" value={seo.score * 100} color="#A78BFA" />
-      </div>
-
-      {/* Section for more detailed report */}
-      <div className="mt-16 bg-gray-50 p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-6">Detailed Breakdown</h2>
-
-        <div className="space-y-4">
-          {/* Performance audits */}
-          <div className="flex justify-between items-center">
-            <strong>First Contentful Paint:</strong>
-            <span>{firstContentfulPaint.displayValue || 'N/A'}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <strong>Largest Contentful Paint:</strong>
-            <span>{largestContentfulPaint.displayValue || 'N/A'}</span>
-          </div>
-
-          {/* Accessibility audits */}
-          <div className="flex justify-between items-center">
-            <strong>Is on HTTPS:</strong>
-            <span>{isOnHttps.score === 1 ? 'Yes' : 'No'}</span>
-          </div>
-
-          {/* Best Practices audits */}
-          <div className="flex justify-between items-center">
-            <strong>Redirects HTTP to HTTPS:</strong>
-            <span>{redirectsHttp.score === 1 ? 'Yes' : 'No'}</span>
-          </div>
-
-          {/* SEO audits */}
-          <div className="flex justify-between items-center">
-            <strong>Viewport Configured:</strong>
-            <span>{viewport.score === 1 ? 'Yes' : 'No'}</span>
-          </div>
-        </div>
       </div>
     </div>
   );
