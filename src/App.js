@@ -11,11 +11,10 @@ function App() {
     // Helper function to wait for a specified amount of time
     const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     let getReport = async(Url) =>{
-      console.log(Url)
      await axios.post('https://light-house-backend.vercel.app/lighthouse-request',{url:Url})
       .then(function (response) {
         setJobId(response.data);
-        console.log(JobId);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
