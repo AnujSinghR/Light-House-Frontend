@@ -12,7 +12,7 @@ function App() {
     const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     let getReport = async(Url) =>{
       console.log(Url)
-     await axios.post('https://light-house-backend.vercel.app/lighthouse',{url:Url})
+     await axios.post('https://light-house-backend.vercel.app/lighthouse-request',{url:Url})
       .then(function (response) {
         setJobId(response);
         console.log(response);
@@ -23,7 +23,7 @@ function App() {
       console.log("wait for 90s");
       //set wait method for wait for getting report then hit api again nerly 90 s
       wait(90000);
-      await axios.post('https://light-house-backend.vercel.app/lighthouse',{JobId:JobId})
+      await axios.post('https://light-house-backend.vercel.app/lighthouse-get',{JobId:JobId})
         .then(function (response){
           setReport(response);
           console.log(Report);
