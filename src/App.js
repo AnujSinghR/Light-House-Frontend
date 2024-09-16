@@ -21,7 +21,7 @@ function App() {
           await wait(90000); // Wait for 90 seconds
 
           // Second API call to get the Lighthouse report using the JobId
-          const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId });
+          const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId:jobId });
           setReport(reportResponse.data); // Set the report data in state
           console.log(Report);
 
