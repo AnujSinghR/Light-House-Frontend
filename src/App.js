@@ -22,7 +22,7 @@ function App() {
       });
       console.log("wait for 90s");
       //set wait method for wait for getting report then hit api again nerly 90 s
-      wait(90000);
+      await wait(90000);
       await axios.post('https://light-house-backend.vercel.app/lighthouse-get',{JobId:JobId})
         .then(function (response){
           setReport(response);
