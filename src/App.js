@@ -15,14 +15,14 @@ function App() {
      await axios.post('https://light-house-backend.vercel.app/lighthouse-request',{url:Url})
       .then(function (response) {
         setJobId(response.data);
-        console.log(response.data);
+        console.log(JobId);
       })
       .catch(function (error) {
         console.log(error);
       });
       console.log("wait for 90s");
       //set wait method for wait for getting report then hit api again nerly 90 s
-      await wait(90000);
+      
       await axios.post('https://light-house-backend.vercel.app/lighthouse-get',{JobId:JobId})
         .then(function (response){
           setReport(response);
