@@ -14,8 +14,8 @@ function App() {
       console.log(Url)
      await axios.post('https://light-house-backend.vercel.app/lighthouse-request',{url:Url})
       .then(function (response) {
-        setJobId(response);
-        console.log(response);
+        setJobId(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
