@@ -33,11 +33,8 @@ function App() {
 
     return (
       <>
-       {!showReport ? (
+       
         <Home getReport={getReport} />
-      ) : (
-        <LighthouseReport report={Report.data.report} />
-      )}
       </>
     )
 }
