@@ -17,7 +17,7 @@ function App() {
     try {
       setIsLoading(true);
       // First API call to trigger the Lighthouse job and get the JobId
-      const response = await axios.post('https://light-house-backend.vercel.app', { url: Url });
+      const response = await axios.post('https://light-house-backend.vercel.app/lighthouse-request', { url: Url });
       const jobId = response.data; // Directly use response data as jobId
       console.log('Job ID:', jobId);
       
@@ -25,7 +25,7 @@ function App() {
       await wait(120000);
       
       // Second API call to get the Lighthouse report using the JobId
-      const reportResponse = await axios.post('https://light-house-backend.vercel.app', { jobId: jobId });
+      const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId: jobId });
       setReport(reportResponse.data); // Set the report data in state
       console.log(reportResponse);
       
