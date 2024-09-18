@@ -29,7 +29,7 @@ function App() {
       const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId: jobId });
       setReport(reportResponse); // Set the report data in state
       console.log(reportResponse);
-
+      setIsLoading(false);
       setShowReport(true); // Show the report in the UI
     } catch (error) {
       console.error(error);
