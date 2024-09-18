@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './App.css';
+import Header from './custom_component/Header.js';
 import Home from './Home.js';
-import LighthouseReport from './LighthouseReport.js';
-import LoadingAnimation from './LoadingAnimation.js';
+import LoadingAnimation from './custom_component/LoadingAnimation.js';
 import axios from 'axios';
+import Report from './custom_component/Report.js';
 
 function App() {
-  const [Report, setReport] = useState();
+  const [report, setReport] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
@@ -28,8 +29,7 @@ function App() {
       const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId: jobId });
       setReport(reportResponse); // Set the report data in state
       console.log(reportResponse);
-      
-      setIsLoading(false);
+
       setShowReport(true); // Show the report in the UI
     } catch (error) {
       console.error(error);
@@ -39,12 +39,13 @@ function App() {
 
   return (
     <>
+    <Header/>
       {isLoading ? (
         <LoadingAnimation />
       ) : !showReport ? (
         <Home getReport={getReport} />
       ) : (
-        <LighthouseReport report={Report.data.report} />
+        <Report report={report.data.report} />
       )}
     </>
   )
