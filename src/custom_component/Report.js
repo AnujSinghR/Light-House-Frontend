@@ -24,6 +24,7 @@ const Report = ({report}) => {
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <Routes>
+            <Route path="/" element={<LighthouseReport report={report}/>} />
             <Route path="/Overview" element={<LighthouseReport report={report}/>} />
             <Route path="/Web-Vitals" element={<WebVitals webVitals={report.audits}/>} />
           </Routes>

@@ -11,7 +11,7 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { name: 'Overview', icon: Home, path: '/Overview' },
+    { name: 'Overview', icon: Home, path: '/' },
     { name: 'Web Vitals', icon: Activity, path: '/Web-Vitals' },
     { name: 'Performance', icon: Zap, path: '/Performance' },
     { name: 'Analytics', icon: BarChart2, path: '/Analytics' },
