@@ -32,9 +32,9 @@ function App() {
       setReport(reportResponse); // Set the report data in state
       console.log(reportResponse);
       
-      const tempReport = await axios.post('https://light-house-backend.vercel.app//get-pagespeed-report',Url);
+      const tempReport = await axios.post('https://light-house-backend.vercel.app/get-pagespeed-report',Url);
       setpagespeed(tempReport);
-      const Crux = await axios.post('https://light-house-backend.vercel.app//get-crux-report',Url);
+      const Crux = await axios.post('https://light-house-backend.vercel.app/get-crux-report',Url);
       setcrux(Crux);
       setIsLoading(false);
       setShowReport(true); // Show the report in the UI
