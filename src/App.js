@@ -8,6 +8,8 @@ import Report from './custom_component/Report.js';
 
 function App() {
   const [report, setReport] = useState();
+  const [pagespeed,setpagespeed] = useState();
+  const [crux,setcrux] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
@@ -16,19 +18,24 @@ function App() {
 
   let getReport = async (Url) => {
     try {
-      setIsLoading(true);
-      // First API call to trigger the Lighthouse job and get the JobId
-      const response = await axios.post('https://light-house-backend.vercel.app/lighthouse-request', { url: Url });
-      const jobId = response.data; // Directly use response data as jobId
-      console.log('Job ID:', jobId);
-      
-      //set timeout for 120s..
-      await wait(90000);
+    //  setIsLoading(true);
+    //  // First API call to trigger the Lighthouse job and get the JobId
+    //  const response = await axios.post('https://light-house-backend.vercel.app/lighthouse-request', { url: Url });
+    //  const jobId = response.data; // Directly use response data as jobId
+    //  console.log('Job ID:', jobId);
+    //  
+    //  //set timeout for 120s..
+    //  await wait(90000);
       
       // Second API call to get the Lighthouse report using the JobId
-      const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId: jobId });
+      const reportResponse = await axios.post('https://light-house-backend.vercel.app/lighthouse-get', { jobId: Url });
       setReport(reportResponse); // Set the report data in state
       console.log(reportResponse);
+      
+      const tempReport = await axios.post('https://light-house-backend.vercel.app//get-pagespeed-report',Url);
+      setpagespeed(tempReport);
+      const Crux = await axios.post('https://light-house-backend.vercel.app//get-crux-report',Url);
+      setcrux(Crux);
       setIsLoading(false);
       setShowReport(true); // Show the report in the UI
     } catch (error) {
@@ -45,7 +52,7 @@ function App() {
       ) : !showReport ? (
         <Home getReport={getReport} />
       ) : (
-        <Report report={report.data.report} />
+        <Report Crux={crux} pagespeed={pagespeed} report={report.data} />
       )}
     </>
   )

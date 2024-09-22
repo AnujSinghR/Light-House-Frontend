@@ -5,12 +5,13 @@ import { Menu, X } from 'lucide-react';
 import { useState } from "react";
 import WebVitals from './WebVitals';
 
-const Report = ({report}) => {
+const Report = ({report,pagespeed,Crux}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
     const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
     };
+    console.log('Crux report',Crux);
   
     return (
           <Router>
@@ -26,7 +27,7 @@ const Report = ({report}) => {
           <Routes>
             <Route path="/" element={<LighthouseReport report={report}/>} />
             <Route path="/Overview" element={<LighthouseReport report={report}/>} />
-            <Route path="/Web-Vitals" element={<WebVitals webVitals={report.audits}/>} />
+            <Route path="/Web-Vitals" element={<WebVitals crux={Crux.data} pagespeed={pagespeed.data}/>} />
           </Routes>
           </div>
           </div>
