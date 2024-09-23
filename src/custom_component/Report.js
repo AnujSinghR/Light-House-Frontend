@@ -11,7 +11,6 @@ const Report = ({report,pagespeed,Crux}) => {
     const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
     };
-    console.log('Crux report',Crux);
   
     return (
           <Router>
