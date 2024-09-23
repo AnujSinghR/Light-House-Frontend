@@ -58,7 +58,7 @@ function App() {
       ) : !showReport ? (
         <Home getReport={getReport} />
       ) : (
-        <Report Crux={crux} pagespeed={pagespeed} report={report.data} />
+        <Report Crux={crux} pagespeed={pagespeed} />
       )}
     </>
   )
