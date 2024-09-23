@@ -1,7 +1,13 @@
 import React from 'react';
 import LCP_element from './LCP_element';
 
-const WebVitals = ({ pagespeed, crux }) => {
+const WebVitals = ({ pagespeed, crux}) => {
+  const siteInfo = {
+    image:pagespeed.lighthouseResult.fullPageScreenshot.screenshot.data,
+    title:pagespeed.id,
+    description:pagespeed.id
+
+  } 
   console.log(pagespeed);
   console.log('Crux report', crux);
 
@@ -29,9 +35,9 @@ const WebVitals = ({ pagespeed, crux }) => {
     };
 
     return (
-      <div className={`p-6 rounded-lg border-l-4 ${getScoreColor(score)} shadow-lg`}>
+      <div className={`p-4 sm:p-6 rounded-lg border-l-4 ${getScoreColor(score)} shadow-lg transition transform hover:scale-105`}>
         <h3 className="text-lg font-semibold mb-1">{title}</h3>
-        <p className="text-3xl font-bold">{value}</p>
+        <p className="text-2xl sm:text-3xl font-bold">{value}</p>
       </div>
     );
   };
@@ -111,15 +117,26 @@ const WebVitals = ({ pagespeed, crux }) => {
   ];
 
   return (
-    <div className="container mx-auto p-8 bg-gray-50 shadow-lg rounded-xl">
+    <div className="container mx-auto p-6 md:p-8 bg-gray-50 shadow-lg rounded-xl">
       <div className="mb-12 flex justify-between items-center">
-        <h1 className="text-4xl font-bold text-gray-900">Lighthouse Report</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Lighthouse Report</h1>
+      </div>
+
+      {/* New Section for Site Info */}
+      <div className="mb-12 flex items-center bg-white p-6 rounded-lg shadow-md">
+        {siteInfo?.image && (
+          <img src={siteInfo.image} alt={siteInfo.title} className="w-24 h-24 rounded-lg mr-4" />
+        )}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800">{siteInfo?.title || 'Website Title'}</h2>
+          <p className="text-gray-600">{siteInfo?.description || 'Website description goes here.'}</p>
+        </div>
       </div>
 
       {pagespeed && (
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">Lab Test Result From Page Speed</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">Lab Test Result From Page Speed</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {renderMetricCards(pagespeedMetrics)}
           </div>
         </div>
@@ -127,7 +144,7 @@ const WebVitals = ({ pagespeed, crux }) => {
 
       {crux?.record?.metrics?.navigation_types?.fractions && (
         <div className="mx-auto mt-8 mb-12 bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Navigation Types</h2>
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">Navigation Types</h2>
           <div className="relative h-6 bg-gray-200 rounded-full overflow-hidden shadow-inner">
             {typeConfig.map((type, index) => {
               const fraction = crux.record.metrics.navigation_types.fractions[type.key] || 0;
@@ -151,13 +168,13 @@ const WebVitals = ({ pagespeed, crux }) => {
               );
             })}
           </div>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {typeConfig.map((type) => {
               const fraction = crux.record.metrics.navigation_types.fractions[type.key] || 0;
               return (
                 <div key={type.key} className="flex items-center">
                   <div
-                    className="w-5 h-5 mr-3 rounded shadow-md"
+                    className="w-4 h-4 mr-2 rounded shadow-md"
                     style={{ backgroundColor: type.color }}
                   />
                   <span className="text-sm font-medium text-gray-700">
@@ -172,17 +189,17 @@ const WebVitals = ({ pagespeed, crux }) => {
 
       {crux && (
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">CrUX Metrics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">CrUX Metrics</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {renderMetricCards(cruxMetrics)}
           </div>
         </div>
       )}
 
       {pagespeed && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-6">Additional Metrics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">Additional Metrics</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {renderMetricCards(additionalMetrics)}
           </div>
         </div>
