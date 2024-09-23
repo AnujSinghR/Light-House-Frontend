@@ -7,9 +7,9 @@ import axios from 'axios';
 import Report from './custom_component/Report.js';
 
 function App() {
-  const [report, setReport] = useState();
-  const [pagespeed,setpagespeed] = useState();
-  const [crux,setcrux] = useState();
+  const [report, setReport] = useState(null);
+  const [pagespeed, setPagespeed] = useState(null);
+  const [crux, setCrux] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
@@ -33,12 +33,17 @@ function App() {
       //setReport(reportResponse); // Set the report data in state
       //console.log(reportResponse);
       
-      const tempReport = await axios.post('https://light-house-backend.vercel.app/get-pagespeed-report',{url:Url});
-      setpagespeed(tempReport);
-      const Crux = await axios.post('https://light-house-backend.vercel.app/get-crux-report',{url:Url});
-      setcrux(Crux);
+      setIsLoading(true);
+
+      // Fetch Pagespeed report
+      const pagespeedResponse = await axios.post('https://light-house-backend.vercel.app/get-pagespeed-report', { url: Url });
+      setPagespeed(pagespeedResponse);
+
+      // Fetch CrUX report
+      const cruxResponse = await axios.post('https://light-house-backend.vercel.app/get-crux-report', { url: Url });
+      setCrux(cruxResponse);
       setIsLoading(false);
-      setShowReport(true); // Show the report in the UI
+      setShowReport(true); // Show the report once both reports are received
     } catch (error) {
       console.error(error);
       setIsLoading(false);
