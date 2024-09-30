@@ -4,8 +4,9 @@ import Sidebar from "./Sidebar";
 import { Menu, X } from 'lucide-react';
 import { useState } from "react";
 import WebVitals from './WebVitals';
+import Lighthouse from './Lighthouse';
 
-const Report = ({report,pagespeed,Crux}) => {
+const Report = ({pagespeed,Crux}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
     const toggleSidebar = () => {
@@ -26,6 +27,7 @@ const Report = ({report,pagespeed,Crux}) => {
           <Routes>
             <Route path="/" element={<WebVitals crux={Crux.data} pagespeed={pagespeed.data}/>} />
             <Route path="/Web-Vitals" element={<WebVitals crux={Crux.data} pagespeed={pagespeed.data}/>} />
+            <Route path="/lighthouse" element={<Lighthouse lighthouse={pagespeed.data.lighthouseResult}/>}/>
           </Routes>
           </div>
           </div>
