@@ -7,7 +7,6 @@ const Lighthouse = ({ lighthouse }) => {
 
   const scores = [
     { label: 'Performance', value: lighthouse.categories.performance.score * 100, color: 'bg-green-500' },
-    
   ];
 
   const getScoreColor = (score) => {
@@ -40,13 +39,16 @@ const Lighthouse = ({ lighthouse }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-10 rounded-lg shadow-2xl text-gray-200 font-sans space-y-12">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-4 md:p-8 lg:p-10 rounded-lg shadow-2xl text-gray-200 font-sans space-y-8 md:space-y-10">
       {/* Scores Section */}
-      <div className="flex flex-wrap justify-center gap-8 mb-6">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-6">
         {scores.map((score, index) => (
-          <div key={index} className={`w-32 h-32 rounded-full flex flex-col items-center justify-center ${getScoreColor(score.value)} border-4 border-white shadow-lg transition-transform duration-300 hover:scale-110`}>
-            <span className="text-sm font-semibold text-white">{score.label}</span>
-            <span className="text-3xl font-bold text-white">{Math.round(score.value)}</span>
+          <div
+            key={index}
+            className={`w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full flex flex-col items-center justify-center ${getScoreColor(score.value)} border-4 border-white shadow-lg transition-transform duration-300 hover:scale-110`}
+          >
+            <span className="text-xs md:text-sm font-semibold text-white">{score.label}</span>
+            <span className="text-2xl md:text-3xl font-bold text-white">{Math.round(score.value)}</span>
           </div>
         ))}
       </div>
@@ -58,11 +60,11 @@ const Lighthouse = ({ lighthouse }) => {
 
       {/* Metrics Section */}
       <div>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-bold">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-bold mb-2 md:mb-0">
             Metrics
           </h2>
-          <button 
+          <button
             onClick={() => toggleSection('metrics')}
             className="text-blue-400 underline font-semibold transition-colors duration-300 hover:text-blue-300 flex items-center"
           >
@@ -70,23 +72,23 @@ const Lighthouse = ({ lighthouse }) => {
             {expandedSection === 'metrics' ? <ChevronUp className="ml-1" /> : <ChevronDown className="ml-1" />}
           </button>
         </div>
-        <div className={`grid gap-6 transition-all duration-500 ${expandedSection === 'metrics' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'}`}>
+        <div className={`grid gap-4 md:gap-6 transition-all duration-500 ${expandedSection === 'metrics' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'}`}>
           {metrics.map((metric, index) => (
-            <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="flex items-center mb-4">
+            <div key={index} className="bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="flex items-center mb-2 md:mb-4">
                 {metric.severity === 'error' && <span className="text-red-500 mr-2">▲</span>}
                 {metric.severity === 'warning' && <span className="text-yellow-500 mr-2">■</span>}
                 {metric.severity === 'success' && <span className="text-green-500 mr-2">●</span>}
-                <span className="text-lg font-semibold">{metric.name}</span>
+                <span className="text-base md:text-lg font-semibold">{metric.name}</span>
               </div>
-              <div className={`text-4xl font-bold ${
+              <div className={`text-3xl md:text-4xl font-bold ${
                 metric.severity === 'error' ? 'text-red-500' : 
                 metric.severity === 'warning' ? 'text-yellow-500' : 
                 'text-green-500'
               }`}>
                 {metric.value}
               </div>
-              <div className="mt-2 text-sm text-gray-400">
+              <div className="mt-1 md:mt-2 text-sm text-gray-400">
                 Score: {Math.round(metric.score)}
               </div>
             </div>
