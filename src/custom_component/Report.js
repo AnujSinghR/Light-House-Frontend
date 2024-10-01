@@ -6,7 +6,7 @@ import { useState } from "react";
 import WebVitals from './WebVitals';
 import Lighthouse from './Lighthouse';
 
-const Report = ({pagespeed,Crux}) => {
+const Report = ({pagespeedDesktop,Crux,URL}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
     const toggleSidebar = () => {
@@ -25,9 +25,9 @@ const Report = ({pagespeed,Crux}) => {
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <Routes>
-            <Route path="/" element={<WebVitals crux={Crux.data} pagespeed={pagespeed.data}/>} />
-            <Route path="/Web-Vitals" element={<WebVitals crux={Crux.data} pagespeed={pagespeed.data}/>} />
-            <Route path="/lighthouse" element={<Lighthouse lighthouse={pagespeed.data.lighthouseResult}/>}/>
+            <Route path="/" element={<WebVitals URL={URL} crux={Crux.data} pagespeedDesktop={pagespeedDesktop.data}/>} />
+            <Route path="/Web-Vitals" element={<WebVitals URL={URL} crux={Crux.data} pagespeedDesktop={pagespeedDesktop.data}/>} />
+            <Route path="/lighthouse" element={<Lighthouse lighthouse={pagespeedDesktop.data.lighthouseResult}/>}/>
           </Routes>
           </div>
           </div>

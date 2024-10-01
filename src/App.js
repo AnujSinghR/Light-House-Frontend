@@ -8,7 +8,8 @@ import Report from './custom_component/Report.js';
 
 function App() {
   const [report, setReport] = useState(null);
-  const [pagespeed, setPagespeed] = useState(null);
+  const [URL,setURl] = useState(null);
+  const [pagespeedDesktop, setPagespeed] = useState(null);
   const [crux, setCrux] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showReport, setShowReport] = useState(false);
@@ -36,12 +37,13 @@ function App() {
       setIsLoading(true);
 
       // Fetch Pagespeed report
-      const pagespeedResponse = await axios.post('https://light-house-backend.vercel.app/get-pagespeed-report', { url: Url });
+      const pagespeedResponse = await axios.post('https://light-house-backend.vercel.app/get-pagespeed-report-desktop', { url: Url });
       setPagespeed(pagespeedResponse);
 
       // Fetch CrUX report
       const cruxResponse = await axios.post('https://light-house-backend.vercel.app/get-crux-report', { url: Url });
       setCrux(cruxResponse);
+      setURl(Url);
       setIsLoading(false);
       setShowReport(true); // Show the report once both reports are received
     } catch (error) {
@@ -58,7 +60,7 @@ function App() {
       ) : !showReport ? (
         <Home getReport={getReport} />
       ) : (
-        <Report Crux={crux} pagespeed={pagespeed} />
+        <Report Crux={crux} pagespeedDesktop={pagespeedDesktop} URL={URL} />
       )}
     </>
   )
